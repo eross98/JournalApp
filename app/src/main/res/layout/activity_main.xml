@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:text="Please click below:"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/btnAddEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="60sp"
+            android:layout_weight="1"
+            android:hint="Add Entry"
+            android:onClick="addEntry" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:hint="Journal"
+            android:id="@+id/btnViewJournal"
+            android:layout_height="0dp"
+            android:layout_margin="60sp"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:hint="Gallery"
+            android:id="@+id/btnViewGallery"
+            android:layout_margin="60sp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

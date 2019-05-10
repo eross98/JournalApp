@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/backgroundpic"
+    android:focusableInTouchMode="true"
+    tools:context=".todoActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="350sp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/btnToDoGoHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:fontFamily="casual"
+            android:text="Thoughts"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="casual"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnToDoGoHome">
+
+            <EditText
+                android:id="@+id/etxtToDoAdd"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10sp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="4"
+                android:fontFamily="casual"
+                android:hint="Enter New Item For List"
+                android:maxLines="1" />
+
+            <Button
+                android:id="@+id/btnToDoAddTask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:fontFamily="casual"
+
+                android:text="Add" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/tellingcrap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="4"
+
+                android:fontFamily="casual"
+                android:text="Click an item to remove from list"
+                android:textStyle="italic" />
+
+
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <ListView
+        android:id="@+id/listToDo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="19.5dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tellingcrap"
+        app:layout_constraintVertical_bias="0.0"></ListView>
+
+</LinearLayout>

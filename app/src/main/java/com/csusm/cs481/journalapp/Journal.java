@@ -46,11 +46,11 @@ public class Journal extends AppCompatActivity implements AdapterView.OnItemClic
     //For custom adapter
     private myAdapter myAdapter;
 
-    //For the shakey
-    private float acelVal;
-    private float acelLast;
-    private float shake;
-    private SensorManager sm;
+    // The following are used for the shake detection
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeDetector mShakeDetector;
+
 
     private int ranNum;
 
@@ -60,22 +60,23 @@ public class Journal extends AppCompatActivity implements AdapterView.OnItemClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journal);
 
-        titleClicker=findViewById(R.id.textView2);
-        randomEntry=findViewById(R.id.getRanThing);
+        titleClicker = findViewById(R.id.textView2);
+        randomEntry = findViewById(R.id.getRanThing);
 
 
         //Nofication
         Calendar calendar = Calendar.getInstance();
 
+
         //Sets the notifcaiton for 8:01pm
-        calendar.set(Calendar.HOUR_OF_DAY,21);
-        calendar.set(Calendar.MINUTE,42);
-        calendar.set(Calendar.SECOND,1);
+        calendar.set(Calendar.HOUR_OF_DAY, 21);
+        calendar.set(Calendar.MINUTE, 42);
+        calendar.set(Calendar.SECOND, 1);
 
         Intent intent = new Intent(getApplicationContext(), notifcationHere.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
 
         newArray = new ArrayList<>();
@@ -95,14 +96,31 @@ public class Journal extends AppCompatActivity implements AdapterView.OnItemClic
             }
         });
 
+// ShakeDetector initialization
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector();
+        mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
 
-        //Shakey
-        sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        //sm.registerListener(SensorE)
+            @Override
+            public void onShake(int count) {
+                if (listData.size() == 0) ;
+                else ranNum = new Random().nextInt(listData.size());
+                if (ranNum < 0) ranNum = ranNum * (-1);
+
+
+                showEntry.getTaskFromMain(listData.get(ranNum));
+                Intent intentGoToTask = new Intent(Journal.this,
+                        showEntry.class);
+                startActivity(intentGoToTask);
+            }
+        });
 
         updateList();
-
-        ranNum= new Random().nextInt(listData.size());
+        if (listData.size() == 0) ;
+        else ranNum = new Random().nextInt(listData.size());
+        if (ranNum < 0) ranNum = ranNum * (-1);
 
 
     }
@@ -166,12 +184,16 @@ public class Journal extends AppCompatActivity implements AdapterView.OnItemClic
     }
 
     public void gotoToDo(View view) {
-        Intent goToDo = new Intent(this,todoActivity.class);
+        Intent goToDo = new Intent(this, todoActivity.class);
         startActivity(goToDo);
     }
 
     public void getRandomEntry(View view) {
-        ranNum= new Random().nextInt(listData.size());
+        if (listData.size() == 0) ;
+        else ranNum = new Random().nextInt(listData.size());
+        if (ranNum < 0) ranNum = ranNum * (-1);
+
+
         showEntry.getTaskFromMain(listData.get(ranNum));
         Intent intentGoToTask = new Intent(Journal.this,
                 showEntry.class);
